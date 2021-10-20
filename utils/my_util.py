@@ -33,4 +33,3 @@ def wav_sim(wav1, wav2):
         res += tmp
     return res / len(wav1)
 
-def search_db()

@@ -4,7 +4,7 @@ from utils.my_util import *
 
 #  read data
 
-df = pd.read_csv(r"C:/Users/user/Desktop/v3/data/TXF_daily.csv")
+df = pd.read_csv(r"C:/Users/user/Desktop/tfx_wav/data/TXF_daily.csv") # 下次記得修改路徑
 df = df.rename(columns={'Unnamed: 0': 'time'})
 
 # claen data
@@ -34,5 +34,4 @@ for i in range(0, int(len(df)/10)):
   direction = str(vector14_sign[i][9])
   hist_db.append({"direction": "{}".format(direction), "vec_wav": reshape_db(tangent_vc(df, "Close"))[0+10*i:10+10*i]})
 
-
-
+print(hist_db[0])
