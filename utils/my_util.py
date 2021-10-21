@@ -1,6 +1,7 @@
 import numpy as np
 import datetime
 from datetime import datetime
+import pandas as pd
 
 
 def d2weekd(date):
@@ -8,7 +9,7 @@ def d2weekd(date):
     return d[datetime.strptime('{}'.format(date), "%Y-%m-%d").weekday()]
 
 
-def tangent_vc(df, colname):
+def tangent_vc(df, colname):  # input shape: data frame
     y = list(df["{}".format(colname)].diff().dropna())
     x = np.ones((1, len(y))).tolist()[0]
     return [x, y]
@@ -32,4 +33,11 @@ def wav_sim(wav1, wav2):
         tmp = cos_sim(wav1[i], wav2[i])
         res += tmp
     return res / len(wav1)
+#
+def shape_input(li):
+    return pd.DataFrame({"close": li})
 
+# def sim_search(li, db):
+#     df = shape_input(li)
+#     for element in db:
+#         element
