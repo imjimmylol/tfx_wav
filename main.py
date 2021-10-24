@@ -1,6 +1,6 @@
+from utils.my_util import *
 import pandas as pd
 import numpy as np
-from utils.my_util import *
 
 #  read data
 
@@ -30,12 +30,21 @@ for i in range(0, int(len(df) / 10)):
 # create db
 hist_db = []
 
-for i in range(0, int(len(df) / 10)):
+for i in range(len(vector14_sign)):
     direction = str(vector14_sign[i][9])
+    vec_wav = reshape_dif_vec(diff_vec(vector14_sign[i][:9]))
     hist_db.append(
-        {"direction": "{}".format(direction), "vec_wav": reshape_db(tangent_vc(df, "Close"))[0 + 10 * i:9 + 10 * i], "sim": 0}
+        {"direction": "{}".format(direction), "vec_wav": vec_wav}
     )
-print(wav_sim(hist_db[0]["vec_wav"], hist_db[1]["vec_wav"]))
-print(type(hist_db[0]))
-# print(hist_db[0].update("sim": 1))
-# print(hist_db[0]["sim"]=1)
+
+#　predict
+tmp = np.array(db_sim_search([17485, 17323.64, 17227.18, 17219.94, 16982.11, 16858.77, 16661.36, 16826.27, 16375.4], hist_db))
+
+qq = list(np.where(tmp > 0.8)[0])
+print(len(qq))
+count = 0
+for i in qq:
+    count += int(hist_db[i]['direction'])
+print("pred: {}".format(count/len(qq)))
+# print("real: "+hist_db[1]['direction'])
+print('=======================')

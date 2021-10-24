@@ -9,15 +9,15 @@ def d2weekd(date):
     return d[datetime.strptime('{}'.format(date), "%Y-%m-%d").weekday()]
 
 
-def tangent_vc(df, colname):  # input shape: data frame
-    y = list(df["{}".format(colname)].diff().dropna())
+def diff_vec(li):
+    y = np.diff(np.array(li)).tolist()
     x = np.ones((1, len(y))).tolist()[0]
     return [x, y]
 
 
-def reshape_db(data):  # [ [x1,x2...],[y1,y2...] ] to [[x1,y1],[x2,y2]....[xn,yn]]
+def reshape_dif_vec(data):  # [ [x1,x2...],[y1,y2...] ] to [[x1,y1],[x2,y2]....[xn,yn]]
     res = []
-    for i in range(500):
+    for i in range(len(data[0])):
         tmp = [data[0][i], data[1][i]]
         res.append(tmp)
     return np.array(res)
@@ -33,11 +33,22 @@ def wav_sim(wav1, wav2):
         tmp = cos_sim(wav1[i], wav2[i])
         res += tmp
     return res / len(wav1)
-#
-def shape_input(li):
-    return pd.DataFrame({"close": li})
 
-# def sim_search(li, db):
-#     df = shape_input(li)
-#     for element in db:
-#         element
+
+def db_sim_search(wav, db):
+    obj_wav = reshape_dif_vec(diff_vec(wav))
+    res = []
+    for i in range(len(db)):
+        tmp = wav_sim(obj_wav, db[i]["vec_wav"])
+        res.append(tmp)
+    return res
+
+
+
+# def db_sim_search(wav, db):
+#     obj_wav = reshape_dif_vec(diff_vec(wav))
+#     res = []
+#     for i in range(len(db)):
+#         tmp = wav_sim(obj_wav, db[i]["vec_wav"])
+#         res.append(tmp)
+#     return sorted(res, reverse=True)
