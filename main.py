@@ -37,7 +37,7 @@ for i in range(len(vector14_sign)):
         {"direction": "{}".format(direction), "vec_wav": vec_wav}
     )
 
-#　predict
+# predict
 tmp = np.array(db_sim_search([17485, 17323.64, 17227.18, 17219.94, 16982.11, 16858.77, 16661.36, 16826.27, 16375.4], hist_db))
 
 qq = list(np.where(tmp > 0.8)[0])
@@ -48,3 +48,4 @@ for i in qq:
 print("pred: {}".format(count/len(qq)))
 # print("real: "+hist_db[1]['direction'])
 print('=======================')
+print(qq)
