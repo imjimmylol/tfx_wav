@@ -37,15 +37,16 @@ for i in range(len(vector14_sign)):
         {"direction": "{}".format(direction), "vec_wav": vec_wav}
     )
 
-# predict
+# predict (enter the data of past 9 days and you'll get the prediction of the asset price for tomorrow)
 tmp = np.array(db_sim_search([17485, 17323.64, 17227.18, 17219.94, 16982.11, 16858.77, 16661.36, 16826.27, 16375.4], hist_db))
 
-qq = list(np.where(tmp > 0.8)[0])
-print(len(qq))
+sim = 0.8
+qq = list(np.where(tmp > sim)[0])
+print("there are {} of hist movement in data base with similarity of the movement of the past 9 days over {}".format(len(qq),sim ))
+print('=======================')
 count = 0
 for i in qq:
     count += int(hist_db[i]['direction'])
-print("pred: {}".format(count/len(qq)))
+print("pred: {} (probability of rise or fall of the stock price next data)".format(count/len(qq)))
 # print("real: "+hist_db[1]['direction'])
 print('=======================')
-print(qq)
