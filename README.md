@@ -17,3 +17,6 @@
 ### 後續更新 : 
 1. 嘗試放長波段(從輸入9日資料到輸入14日資料)加上參數搜尋來檢查是否能改善準確率。[colab連結請點我](https://colab.research.google.com/drive/1Pnh8Co9Xcr4kg9SBJeJBf0q9hKtThrJk?usp=sharing)
 2. 視覺化模型所找出的相似波段與輸入波段。[colab連結請點我](https://colab.research.google.com/drive/1Rx1cwmhghXJSp_0IiMDvoH2Nj0EBIm1p?usp=sharing)
+
+### 上圖為輸入波段，下圖為自訂算法所計算出之相似波段
+![](img/sim_wav.png)
